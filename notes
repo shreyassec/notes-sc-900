@@ -1,0 +1,539 @@
+**Part1: Describe the concepts of security, compliance, and identity**
+
+1. Zero Trust guiding principles
+- Verify explicitly
+- Least privileged access
+- Assume breach
+
+2. Six pillars of ZTM:
+- Identities
+- Devices
+- Applications
+- Data
+- Infrastructure
+- Networks
+
+3. Shared responsibility model
+- Software as a Service (SaaS)
+- Platform as a Service (PaaS)
+- Infrastructure as a Service (IaaS)
+- On-premises datacenter (On-prem)
+
+4. Defense in depth:
+- Physical security
+- Identity and access 
+- Perimeter 
+- Network 
+- Compute layer
+- Application
+- Data
+
+5. Describe common threats
+- Data breach
+- Dictionary attack
+- Ransomware
+- Disruptive attacks
+
+6. Describe ways encryption hashing and signing can secure your data
+- Encryption at rest
+- Encryption in transit
+- Hashing
+- Signing
+
+7. Microsoft's privacy principles
+- Control
+- Transparency
+- Security
+- Strong legal protections
+- No content-based targeting
+- Benefits to you
+
+8. Service Trust Portal
+- Trust Documents: Audit Reports, Data Protection, Azure Security and Compliance Blueprints
+- Industries & Regions: 
+- Trust Center
+- My Library
+- More: administrative functions
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Part 2: Describe the capabilities of Microsoft Identity and access management solutions**
+
+1. Describe common identity attacks
+- Password-based attacks
+- Phishing
+- Spear phishing
+
+2. Define Identity as the primary security perimeter
+- Four pillars of identity: Administration, Authentication, Authorization, Auditing
+
+3. Modern authentication
+- Client ---"auth"--> Identity provider---"token"---> Client
+Client ---"token"---> Server
+- Server has trust relationship with the Identity provider
+- SSO between multiple identity providers is called federation
+
+4. Describe the concept of Federated Services
+E.g.:
+The website uses the authentication services of IdP-A.
+The user authenticates with IdP-B.
+IdP-A has a trust relationship configured with IdP-B.
+When the user’s credentials are passed to the website, the website trusts the user and allows access.
+
+5. Describe the concept of directory services and active directory
+- AD DS does not natively support modern authentication methods used by mobile devices, SaaS, cloud services etc.
+- Azure Active Directory is the next evolution of identity and access management solutions. It provides organizations with an Identity as a Service (IDaaS) solution for all their apps across cloud and on-premises. 
+- AAD is the cloud based Identity Provider.
+- When sharing your apps and resources with external users, Azure AD is the default identity provider for sharing.
+
+6. Describe the available Azure AD editions
+- Azure Active Directory Free
+- Office 365 Apps
+- Azure Active Directory Premium P1
+- Azure Active Directory Premium P2
+
+7. Describe Azure AD identity types
+- users: Employees, guests, B2B users etc. Can assign groups and roles to users in AAD
+- service principals: A service principal is a security identity used by applications or services to access specific Azure resources. You can think of it as an identity for an application.
+- managed identities: used to manage the credentials for authenticating a cloud application with an Azure service.
+	  - System-assigned
+	  - User-assigned
+- devices
+	  - Azure AD registered devices: personal account signin
+	  - Azure AD joined: org sign in
+	  - Hybrid Azure AD joined devices: ADDS signin
+	  - IT admins can use tools like Microsoft Intune, a mobile device management (MDM) solution, to manage devices.
+
+8. Describe the types of external identities
+- Azure AD External Identities is a set of capabilities that enable organizations to allow access to external users, such as customers or partners.
+- Available only with P1 and P2 AAD editions
+- B2B collaboration: allows external users to access your resources with their credentials
+	  - External users marked as guest users in the employee directory
+- B2C access management: allows external users to sign in with their preferred social, enterprise, or local account identities to get single sign-on to your applications.
+	  - external users are managed in the Azure AD B2C directory, separately from the organization's employee and partner directory
+	
+9. Describe the concept of hybrid identities
+- With the hybrid model, users accessing both on-premises and cloud apps are hybrid users managed in the on-premises Active Directory.
+- For updates to on-prem ADDS, all updates to user accounts, groups, and contacts are synchronized to your Azure AD. The synchronization is managed with Azure AD Connect.
+- When using the hybrid model, authentication can either be done by Azure AD, which is known as managed authentication, or Azure AD redirects the client requesting authentication to another identity provider, which is known as federated authentication.
+- 3 AuthN methods:
+	  - Password hash synchronization: Users have the same username and password that they use on-premises
+	  - Pass-through authentication (PTA): A software agent runs on on-prem servers and these servers validate users directly with the on-prem ADDS, preventing cloud authN
+	  - Federated authentication: Azure AD hands off the authentication process to a separate trusted authentication system, such as on-premises Active Directory Federation Services (AD FS), to validate the user’s password.
+
+10. Describe the different authentication methods of Azure AD
+- Azure Active Directory multifactor authentication: Something you know, Something you have, Something you are
+- Security defaults: set of basic identity security mechanisms recommended by Microsoft
+  	- enforces AAD MFA registration for all users
+  	- forces Admins to use MFA
+  	- Requires all users to complete MFA when needed
+	
+11. Describe Multi-factor authentication (MFA) in Azure AD
+- Passwords
+- Password and additional verification
+- Phone
+- Microsoft Authenticator app
+- OATH
+- Passwordless authentication
+- Biometrics
+- FIDO2 (in preview)
+
+12. Describe Windows Hello for Business
+- two configurations for Windows Hello: Windows Hello and Windows Hello for Business.
+- uses PIN or biometric tied to a specific device and uses Trusted Platform Module (TPM) chip, which is a secure crypto processor that's designed to carry out cryptographic operations
+
+13. Describe self-service password reset (SSPR) in Azure AD
+- scenarios: Password change, Password reset, account unlock
+- AuthN methods for SSPR: Mobile app notification, Mobile app code, Email, Mobile phone, Office phone, Security questions
+- The reset password can be written back to on-prem ADDS so the new password can be used on ADDS
+
+14. Describe password protection and management capabilities of Azure AD
+- Global banned password list
+- Custom banned password lists
+- Protecting against password spray
+- Hybrid security: integrate Azure AD Password Protection within an on-premises Active Directory environment to check passwords
+
+15. Describe conditional access and its benefits
+- Conditional Access is a feature of Azure AD that provides an extra layer of security before allowing authenticated users to access data or other assets. 
+- Conditional Access is implemented through policies that are created and managed in Azure AD. 
+- A Conditional Access policy analyses signals including user, location, device, application, and risk to automate decisions for authorizing access to resources (apps and data).	
+- Conditional access signals:
+  	- User or group membership
+  	- Named location information
+  	- Device
+  	- Application
+  	- Real-time sign-in risk detection
+  	- Cloud apps or actions
+  	- User risk
+- Access controls: based on the policies: block, grant or require cetain conditions to be met like require MFA/device to be registered etc.
+
+16. Describe Azure AD role-based access control
+- Built-in roles, few egs below
+  	- Global administrator
+  	- User administrator
+  	- Billing administrator
+- Custom roles, require AAD P1/P2 sub
+
+17. Describe identity governance in Azure AD
+- Identity lifecycle: join, move, and leave
+- Access lifecycle: Access lifecycle is the process of managing access throughout the user’s organizational life. Can use Dynamic groups which checks user attributes against group rules and adds/removes the user from that group.
+- Privileged access lifecycle
+- Azure AD Privileged Identity Management (PIM), provides extra controls tailored to securing access rights
+- PIM is a feature of Azure AD Premium P2
+
+18. Describe what is entitlement management and access reviews
+- Entitlement management is an identity governance feature that enables organizations to manage identity and access lifecycle at scale.
+- Entitlement Management is required because: 
+  	-Users may not know what access they should have, and even if they do, they might have difficulty locating the right individuals to approve it.
+  	- When users find and receive access to a resource, they may hold on to access longer than is required for business purposes.
+  	- Managing access for external users.
+- EM delegates creation of access packages to non-administrators and includes rules like which users can request access,who will approve and when it expires. New users can simple request for these access packages. Similar for external users.	
+- Entitlement management is a feature of Azure AD Premium P2.
+
+19. Azure AD access reviews
+- Azure Active Directory (AD) access reviews enable organizations to efficiently manage group memberships, access to enterprise applications, and role assignment.
+- Access reviews can be created through Azure AD access reviews, or Azure AD Privileged Identity Management (PIM)
+- Access reviews are a feature of Azure AD Premium P2.
+
+20. Azure AD terms of use
+- Azure AD terms of use allow information to be presented to users, before they access data or an application.
+
+21. Describe the capabilities of Privileged identity Management
+- Privileged Identity Management is a feature of Azure AD Premium P2.
+- User access is sent for approval in PIM
+
+22. Describe Azure Identity Protection
+- Automate the detection and remediation of identity-based risks.
+- Investigate risks using data in the portal.
+- Export risk detection data to third-party utilities for further analysis.
+- Identity Protection categorizes risk into three tiers: low, medium, and high
+- Sign-in risk
+  	- Atypical travel. Sign-in from an atypical location based on the user's recent activity.
+  	- Anonymous IP address. Sign-in from an anonymous IP address; for example, Tor browser, anonymized VPNs).
+- User risk
+	  - Unfamiliar sign-in properties. Sign-in with properties you've not seen recently for a given user.
+  	- Sign-in from a malware-linked IP address.
+  	- Leaked credentials. Indicates that the user's valid credentials have been leaked.
+  	- Password spray. Indicates that multiple usernames are being attacked using common passwords in a unified, brute-force manner.
+  	- Azure AD threat intelligence. Microsoft's internal and external threat intelligence sources have identified a known attack pattern.
+- Available reports: risky users, risky sign-ins, and risk detections
+- Identity Protection is a feature of Azure AD Premium P2.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**Part3: Describe the capabilities of Microsoft security solutions**
+
+1. Describe Azure Network Security groups
+- Network security groups: source, source port, destination, destination port, and protocol to either allow or deny the traffic
+- Priority: 100 to 4096. 100 is highest priority
+
+2. Describe Azure DDoS protection
+- Distributed Denial of Service attacks: Volumetric attacks, Protocol attacks, Resource (application) layer attacks
+- Azure DDoS Protection comes in two tiers:
+  	- Basic: automatically enabled for every property in Azure, at no extra cost
+  	- Standard: provides extra mitigation capabilities that are tuned specifically to Microsoft Azure Virtual Network resources. Charged monthly for 100 resources
+
+3. Describe what is Azure Firewall
+- Built-in high availability and availability zones
+- Network and application level filtering
+- Outbound SNAT and inbound DNAT to communicate with internet resources
+- Multiple public IP addresses
+- Threat intelligence
+- Integration with Azure Monitor
+
+4. Describe what is Azure Bastion
+- PaaS solution
+- Azure Bastion provides secure and seamless RDP/SSH connectivity to your virtual machines directly from the Azure portal using Transport Layer Security (TLS)
+- deployment is per virtual network and not per subscription/account or VM
+- Features:
+	  - RDP and SSH directly in Azure portal
+  	- Remote session over TLS and firewall traversal for RDP/SSH
+  	- No Public IP required on the Azure VM
+  	- No hassle of managing NSGs
+  	- Protection against port scanning
+  	- Protect against zero-day exploits
+	
+5. Describe what is Web Application Firewall
+- WAF can be deployed with Azure Application Gateway, Azure Front Door, and Azure Content Delivery Network (CDN) services from Microsoft.
+
+6. Describe ways Azure encrypts data
+- Encryption on Azure:
+  	- Azure Storage Service Encryption: data at rest
+  	- Azure Disk Encryption: encrypt Windows and Linux IaaS virtual machine disks (BitLocker feature of Windows and the dm-crypt feature of Linux)
+  	- Transparent data encryption (TDE): performs real-time encryption and decryption of the database, backups and logs
+- What is Azure Key Vault: centralized cloud service for storing your application secrets
+  	- Secrets management: control access to tokens, passwords, certificates, Application Programming Interface (API) keys, and other secrets
+  	- Key management: reate and control the encryption keys used to encrypt your data.
+  	- Certificate management: provision, manage, and deploy your public and private Secure Sockets Layer/ Transport Layer Security (SSL/ TLS) certificates
+  	- Store secrets backed by hardware security modules (HSMs): The secrets and keys can be protected either by software or by FIPS 140-2 Level 2 validated HSMs.
+	
+7. Describe Cloud security posture management
+- CSPM uses a combination of tools and services:
+  	- Zero Trust-based access control
+  	- Real-time risk scoring
+  	- Threat and vulnerability management (TVM)
+  	- Discover sharing risks
+  	- Technical policy
+  	- Threat modeling systems and architectures
+	
+8. Describe and explore the Azure Security center
+- Strengthen your security posture
+  	- Continuous assessment
+  	- Network map
+- Protect against threats
+  	- Integration with Microsoft Defender
+  	- Protect PaaS
+  	- Block brute force attacks
+  	- Protect data services
+- Get secure faster
+
+9. Describe and explore Azure Secure score
+- Security Center continually assesses your resourc-es, subscriptions, and organization for security issues. It then aggregates all the findings into a single score
+
+10. Describe the benefit and use cases of Azure Defender
+- Azure Defender is the leading Microsoft extended detection and response (XDR) solution for threat protection
+- Available plans for Azure Defender
+  	- Azure Defender for servers
+  	- Azure Defender for App Service
+  	- Azure Defender for Storage
+  	- Azure Defender for SQL
+  	- Azure Defender for Kubernetes
+  	- Azure Defender for container registries
+  	- Azure Defender for Key Vault
+- Hybrid cloud protection
+- Azure Defender alerts
+- Advanced protection
+- Vulnerability assessment
+
+11. Describe security baselines for Azure
+- The Azure Security Benchmark (ASB) provides prescriptive best practices and recommendations to help improve the security of workloads, data, and services on Azure.
+
+12. Describe the different pricing tiers
+- Security Center without Azure Defender is enabled free of charge on all your Azure subscriptions
+- Enabling Azure Defender extends the free mode capabilities to workloads running in private and other public clouds, providing unified security management and threat protection across your hybrid cloud workloads.
+
+13. Define the concepts of SIEM, SOAR, XDR
+- SIEM: A SIEM system is a tool that an organization uses to collect data from across the whole estate, including infrastructure, software, and resources. It does analysis, looks for correlations or anomalies, and generates alerts and incidents.
+- SOAR: A SOAR system takes alerts from many sources, such as a SIEM system. The SOAR system then triggers action-driven automated workflows and processes to run security tasks that mitigate the issue.
+- XDR: An XDR system is designed to deliver intelligent, automated, and integrated security across an organization’s domain. It helps prevent, detect, and respond to threats across identities, endpoints, applications, email, IoT, infrastructure, and cloud platforms.
+
+14. Describe how Sentinel provides integrated threat protection
+- Microsoft Azure Sentinel is a scalable, cloud-native SIEM/SOAR solution that delivers intelligent security analytics and threat intelligence across the enterprise. It provides a single solution for alert detection, threat visibility, proactive hunting, and threat response.
+- Functionality: Collect > Detect > Investigate > Respond
+- Data connectors available to be connected:
+  	- syslog
+  	- Windows Event Logs
+  	- Common Event Format (CEF)
+  	- Trusted Automated eXchange of Indicator Information (TAXII), for threat intelligence
+  	- Azure
+  	- AWS services
+- Costs:
+  	- Capacity Reservations: With Capacity Reservations, you're billed a fixed fee based on the selected tier, enabling a predictable total cost for Azure Sentinel.
+  	- Pay-As-You-Go: With Pay-As-You-Go pricing, you're billed per gigabyte (GB) for the volume of data ingested for analysis in Azure Sentinel and stored in the Azure Monitor Log Analytics workspace.
+
+15. Describe Microsoft 365 Defender services
+- Microsoft 365 Defender allows admins to assess threat signals from applications, email, and identity to determine an attack's scope and impact.
+
+16. Describe Microsoft Defender for Identity
+- cloud-based security solution. It uses your on-premises Active Directory data (called signals) to identify, detect, and investigate advanced threats, compromised identities, and malicious insider actions directed at your organization.
+- Monitor and profile user behavior and activities
+- Protect user identities and reduce the attack surface
+- Identify suspicious activities and advanced attacks across the cyberattack kill-chain
+
+17. Describe Microsoft Defender for Office 365
+- safeguards your organization against malicious threats posed by email messages, links (URLs), and collaboration tools, including Microsoft Teams, SharePoint Online, OneDrive for Business, and other Office clients.
+- Available in 2 Plans:
+  	- Plan1: Safe Attachments, Safe Links, Protection for SharePoint, OneDrive, and Microsoft Teams, Anti-phishing protection, Real-time detections
+  	- Plan 2: Plan1, Threat Trackers, Threat Explorer, Automated investigation and response (AIR), Attack Simulator
+- Microsoft Defender for Office 365 is included in certain subscriptions, such as Microsoft 365 E5, Office 365 E5, Office 365 A5, and Microsoft 365 Business Premium.
+
+18. Describe Microsoft Defender for Endpoint
+- platform designed to help enterprise networks protect endpoints.
+
+19. Describe Microsoft Cloud App Security
+- Microsoft Cloud App Security (MCAS) is a Cloud Access Security Broker (CASB). It's a comprehensive cross-SaaS solution that operates as an intermediary between a cloud user and the cloud provider.	
+- Office 365 Cloud App Security: subset of MCAS
+- When using Cloud App Security, consideration must be given to the architecture of the entire estate.
+
+20. Describe and explore the Microsoft 365 security center
+- The Microsoft 365 security center is the new home for monitoring and managing security across your Microsoft identities, data, devices, and apps.
+- Here you can view the security health of your organization, act to configure devices, users, and apps, and get alerts for suspicious activity.
+- You must be assigned an appropriate role, such as Global Administrator, Security Administrator, Security Operator, or Security Reader in Azure Active Directory to access the Microsoft 365 security center.
+
+21. Describe how to use Microsoft Secure Score
+- Microsoft Secure Score, one of the tools in the Microsoft security center, is a representation of a company's security posture. The higher the score, the better your protection.
+
+22.Differences between the Azure and Microsoft Secure Score
+- Secure Score in the Azure Security Center is a measure of the security posture of your Azure subscriptions. Secure Score in the Microsoft 365 security center is a measure of the security posture of the organization across your apps, devices, and identities.
+
+23. Explore security reports and dashboards
+- The Microsoft security center includes a Reports section that shows various cards covering different areas.
+
+24. Describe incidents capabilities
+- Incident management: In Microsoft 365 Defender, you can manage incidents on devices, users accounts, and mailboxes.
+
+25. Describe what is Intune
+- Microsoft Intune is a cloud-based service that focuses on mobile device management (MDM) and mobile application management (MAM). 
+- Mobile device management (MDM): For devices that are owned by the business, organizations can maintain full control.
+- Mobile application management (MAM): Users with personal devices might not want their phone to be under full corporate control. Mobile application management (MAM) gives admins the ability to protect corporate data at the application level.
+
+26. Describe endpoint security with Intune
+- Manage devices
+- Manage security baselines: Security baseline settings are used only on devices running Windows 10 version 1809 or later.
+- Use policies to manage device security
+- Use device compliance policy
+- Configure conditional access: Intune + Azure Conditional Access
+- Integration with Microsoft Defender for Endpoint
+- Role-based access control with Microsoft Intune
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+**part 4: Describe the capabilities of Microsoft compliance solutions**
+
+1. Describe common compliance needs
+- HIPAA, FERPA, ISO 27701
+	
+2. Describe the Compliance Center
+- available to customers with a Microsoft 365 SKU as following roles: Global administrator, Compliance administrator, Compliance data administrator	
+- compliance score
+- Solution catalog
+- active alerts
+
+3. Describe Compliance Manager
+- Microsoft Compliance Manager is a feature in the Microsoft 365 compliance center that helps admins to manage an organization’s compliance requirements with greater ease and convenience.
+- Controls: A control is a requirement of a regulation, standard, or policy. It defines how to assess and manage system configuration, organizational process, and people responsible for meeting a specific requirement of a regulation, standard, or policy.
+- Assessments: An assessment is a grouping of controls from a specific regulation, standard, or policy
+- Templates: Compliance Manager provides templates to help admins to quickly create assessments.
+- Improvement actions: Improvement actions help centralize compliance activities
+
+4. Describe use and benefits of compliance score
+- Compliance score measures progress in completing recommended improvement actions within controls.
+
+5. Know your data, protect your data, and govern your data
+- Microsoft Information Protection (MIP) discovers, classifies, and protects sensitive and business-critical content throughout its lifecycle across your organization. It provides the tools to know your data, protect your data, and prevent data loss.
+- Microsoft Information Governance (MIG) manages your content lifecycle using solutions to import, store, and classify business-critical data so you can keep what you need and delete what you don't
+- Know your data, Protect your data, Prevent data loss, Govern your data
+
+6. Describe data classification capabilities in the Microsoft 365 Compliance Center
+- Sensitive information types: patterns for common data types like credit/debit card nos, bank a/c nos etc.
+- Trainable classifiers: Trainable classifiers use artificial intelligence and machine learning to intelligently classify your data
+  	- Pre-trained classifiers: MS created
+  	- Custom trainable classifiers
+	
+7. What is the content explorer?
+- Roles having access to this: 
+  	- Content explorer list viewer.
+  	- Content explorer content viewer.
+
+8.What is the activity explorer?
+- Activity explorer provides visibility into what content has been discovered and labeled, and where that content is. It makes it possible to monitor what's being done with labeled content across the organization
+
+9. Describe sensitivity labels and policies
+- Sensitivity labels: Sensitivity labels, available as part of information protection in the Microsoft 365 compliance center, enable the labeling and protection of content, without affecting productivity and collaboration
+- Label policies: Sensitivity labels are published to users or groups through label policies.
+	
+10. Describe data loss prevention
+- What is endpoint data loss prevention?: DLP in Windows 10 devices
+- Data loss prevention in Microsoft Teams
+
+11. Describe retention polices and retention labels
+- Retention labels and policies help organizations to manage and govern information by ensuring content is kept only for a required time, and then permanently deleted
+- Retention policies: Retention policies are used to assign the same retention settings to content at a site level or mailbox level.
+- Retention labels: Retention labels are used to assign retention settings at an item level, such as a folder, document, or email.
+- a combination of policies and labels should be implemented for multiple items in a single folder with 2 different retention dates
+
+12. Describe records management
+- Records management in Microsoft 365 helps an organization look after their legal obligations.
+- The content needs to be labeled as a record for this to work. Once labeled the following happens:
+  	- Restrictions are put in place to block certain activities.
+  	- Activities are logged.
+  	- Proof of disposition is kept at the end of the retention period.
+	
+13. Describe the insider risk management solution
+- Insider risk management is a solution in Microsoft 365 that helps minimize internal risks by enabling an organization to detect, investigate, and act on risky and malicious activities. Insider risk management is available in Microsoft 365 compliance center.
+- Insider risk management is centered around the following principles:
+  	- Transparency
+  	- Configurable
+  	- Integrated
+  	- Actionable
+
+14. Describe communication compliance
+- Communication compliance in Microsoft 365 compliance center helps minimize communication risks by enabling organizations to detect, capture, and take remediation actions for inappropriate messages. 
+- Identifying and resolving compliance issues with communication compliance in Microsoft 365 uses the following workflow:	
+  	- Configure: configure policies
+  	- Investigate
+  	- Remediate
+  	- Monitor
+	
+15.Describe information barriers
+- With information barriers, the organization can restrict communications among specific groups of users.
+- information barriers only support two-way restrictions
+
+16. Describe privileged access management
+- Privileged access management allows granular access control over privileged admin tasks in Microsoft 365
+-  zero standing access: means that any user who needs privileged access must request permissions for access, and will receive only the level of access they need just when they need it, and with just-enough access to do the job at hand.
+- Privileged access management is defined and scoped at the task level, while Azure AD Privileged Identity Management applies protection at the role level with the ability to execute multiple tasks
+
+17. Describe Customer Lockbox
+- Customer Lockbox ensures that Microsoft engineers can't access the content to perform a service operation without explicit approval. 	
+- Customer Lockbox supports requests to access data in Exchange Online, OneDrive for Business, and SharePoint Online
+- MS Support manager > approves request > Customer > approves request > Engineer can access
+
+18. Describe the purpose of eDiscovery
+- For litigation evidence: Electronic discovery or eDiscovery tools, can be used to search for content in Exchange Online mailboxes, Microsoft 365 Groups, Microsoft Teams, SharePoint Online and OneDrive for Business sites, Skype for Business conversations, and Yammer teams.
+
+19. Describe the capabilities of the content search tool
+- The Content Search eDiscovery tool, accessible from the compliance center in Office 365 or Microsoft 365, enables search for in-place items such as email, documents, and instant messaging conversations in your organization
+- To have access to the content search page to run searches and preview and export results, an administrator, compliance officer, or eDiscovery manager must be a member of the eDiscovery Manager role group in the Security and Compliance Center.
+
+20. Describe the core eDiscovery workflow
+- Create an eDiscovery hold: create a hold to preserve content that might be relevant to the case
+- Search for content in the case: use Boolean operators such as AND, OR, NOT, or NEAR
+- Export content from a case: once case is close, there’s a 30-day grace period (referred to as a delay hold) on the content locations that were on hold before deletion
+- Close, reopen, and delete a core eDiscovery case
+
+21. Describe the advanced eDiscovery workflow
+- This new solution provides an end-to-end workflow to preserve, collect, review, analyze, and export content that's relevant to your organization's internal and external investigations. It also lets legal teams manage the entire legal hold notification workflow to communicate with custodians involved in a case.
+- Workflow:
+  	- Add custodians to a case
+  	- Search custodial data sources for data relevant to the case
+  	- Add data to a review set
+  	- Review and analyze data in a review set
+  	- Export and download case data
+	
+22. Describe the core audit capabilities of Microsoft 365
+- For core audit capability, the audit record is kept and searchable for 90 days.
+- It can take up to 30 minutes or up to 24 hours after an event occurs for the corresponding audit log record to be returned in the results of an audit log search.
+
+23. Describe purpose and value of Advanced Auditing
+- Advanced Audit helps organizations to conduct forensic and compliance investigations by increasing audit log retention that's required to conduct an investigation.
+- Microsoft 365 E5 license, or a Microsoft 365 E3 or Office 365 E3 license with a Microsoft 365 E5 Compliance, or Microsoft 365 E5 eDiscovery and Audit add-on license.
+- Long-term retention of audit logs
+  	- Advanced Audit keeps all Exchange, SharePoint, and Azure Active Directory audit records for one year
+  	- Retaining audit logs for 10 years requires an additional add-on license.
+- Access to crucial events for investigations
+- High-bandwidth access to Office 365 Management Activity API
+
+24. Describe the use of Azure Resource Manager locks
+- Azure Resource Manager is the deployment and management service for Azure. Azure Resources Manager provides a management layer that enables administrators to create, update, and delete resources in an Azure account.
+- Resource locks are used to prevent resources from being accidentally deleted or changed. 
+- A lock level can be set to CanNotDelete or ReadOnly.
+- When you apply a lock at a parent scope, all resources within that scope inherit that lock.
+- The most restrictive lock in the inheritance takes precedence.
+
+25.Describe the use of Azure Blueprints
+- Azure Blueprints provide a way to define a repeatable set of Azure resources. Azure Blueprints enable development teams to rapidly provision and run new environments, with the knowledge that they're in line with the organization’s compliance requirements.
+
+26. Describe Azure Policy
+- Azure Policy is designed to help enforce standards and assess compliance across your organization
+- Azure policy only evaluates, Azure RBAC manages the access
+
+27. Describe the cloud adoption framework
+- Microsoft Cloud Adoption Framework for Azure consists of documentation, implementation guidance, best practices, and tools designed to help businesses to implement strategies necessary to succeed in the cloud.
+- following steps is part of the cloud adoption lifecycle:
+  	- Strategy
+  	- Plan
+  	- Ready
+  	- Adopt: Migrate, Innovate
+  	- Govern
+  	- Manage
